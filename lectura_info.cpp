@@ -22,49 +22,39 @@ double datosmatriz[filamatriz][colmatriz];
 double matrizcorr[colmatriz][colmatriz];
 
 void head(ifstream& inFile){
-
-    cout << left;
-    cout <<setw(col_width) << "Serial"<< setw(col_width) << "GRE_SCORE"<< setw(col_width) << "TOEFL"<< setw(col_width) << "Rating"<< setw(col_width) << "SOP"<< setw(col_width) << "LOR"<< setw(col_width) << "CGPA"<< setw(col_width) << "Research"<< setw(col_width) << "Chance"<< endl;
     
     string linea;
 
-    getline(inFile, linea);
-    for(int i=0; i<4;i++){
+    cout<<endl;
+
+
+    for(int i=0; i<5;i++){
 
         getline(inFile, linea);
 
 
         string particion;
 
-        stringstream linea_estudiante(linea);
-        
-            
-        getline(linea_estudiante,particion,',');
-        int serial=stoi(particion);
-        getline(linea_estudiante,particion,',');
-        int gre=stoi(particion);
-        getline(linea_estudiante,particion,',');
-        int toefl=stoi(particion);
-        getline(linea_estudiante,particion,',');
-        int university_rating=stoi(particion);
-        getline(linea_estudiante,particion,',');
-        float sop=stof(particion);
-        getline(linea_estudiante,particion,',');
-        float lor=stof(particion);
-        getline(linea_estudiante,particion,',');
-        float cgpa=stof(particion);
-        getline(linea_estudiante,particion,',');
-        int research=stoi(particion);
-        getline(linea_estudiante,particion,',');
-        float chance_of_admit=stof(particion);
+        stringstream linea_partida(linea);
 
-        cout<<left;
-        cout<<setw(col_width)<<serial<<setw(col_width)<<gre<<setw(col_width)<<toefl<<setw(col_width)<<university_rating<<setw(col_width)<<sop<<setw(col_width)<<lor<<setw(col_width)<<cgpa<<setw(col_width)<<research<<setw(col_width)<<chance_of_admit<<endl;
+        int x=0;
+    
+        while(getline(linea_partida,particion,',')){
 
+            if(x==0){
+
+                cout<<left<<setw(20)<<particion;
+
+            }else{
+
+                cout<<right<<setw(20)<<particion;
+
+            }
+            x++;
+        }
+        x=0;
+        cout<<"\n";
     }
-
-
-
 }
 
 void info(ifstream& inFile){
@@ -646,7 +636,7 @@ int main(){
         cout<<"\e[1mBase de datos leida exitosamente\e[0m"<<endl;
     }
 
-    cout<<endl<<"Primeras 5 filas"<<endl;
+    cout<<endl<<"Primeras 5 filas";
     head(archivo);
 
     cout<<endl;

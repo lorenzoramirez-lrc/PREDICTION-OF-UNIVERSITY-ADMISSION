@@ -6,13 +6,12 @@
 
 using namespace std;
 
-void menu();
 
 
 int main(){
-
+    //Se crea csv
     CSV csv;
-    ifstream archivo("Admissions.csv");
+    ifstream archivo("Admissions.csv");  //Se abre el archivo
     string enter;
 
     cout<<endl<<endl;
@@ -23,6 +22,7 @@ int main(){
     cout<<"Ingrese cualquier tecla para iniciar la lectura de la base de datos: ";
     cin>>enter;
     
+    //Revision de que se haya abierto correctamente
     if (!archivo.is_open()){
         cerr << "Error: No se pudo abrir el archivo" << endl;
         return 1;
@@ -30,10 +30,12 @@ int main(){
         cout<<"\e[1mBase de datos leida exitosamente\e[0m"<<endl;
     }
 
+    //Se lee csv
     csv= readCSV(archivo);
 
     archivo.close();
-
+    
+    //Se asigna numero de filas columnas y matrizx
     int numero_filas=csv.numero_filas;
     int numero_columnas=csv.numero_columnas;
     string **matriz=csv.matriz;
@@ -41,34 +43,42 @@ int main(){
     int opcion=-1;
 
     do{
-
-        menu();
+        //Menu
+        cout << "-------------------------------------\n";
+        cout << "  [1] Head\n";
+        cout << "  [2] Info\n";
+        cout << "  [3] Describe\n";
+        cout << "  [4] Correlation Matrix\n";
+        cout << "  [5] Guardar resultados del analisis, cargar la base de datos a archivo binario y salir\n";
+        cout << "-------------------------------------\n";
+        cout << "Ingrese el número de la opción deseada: ";
         cin>>opcion;
         cout<<endl<<endl;
 
         switch(opcion){
 
+            //Head con su respectiva funcion
             case 1:
                 cout<<"\e[1m====HEAD====\e[0m"<<endl;
                 printHead(matriz, numero_columnas);
                 cout<<endl<<endl;
                 break;
-            case 2:
+            case 2:  //Info con su respectiva funcion
                 cout<<"\e[1m====INFO====\e[0m"<<endl;
                 printInfo(matriz, numero_columnas, numero_filas);
                 cout<<endl<<endl;
                 break;
-            case 3:
+            case 3: //Describe con su respectiva funcion
                 cout<<"\e[1m====DESCRIBE====\e[0m"<<endl;
-
+                printDescribe(matriz, numero_columnas, numero_filas);
                 cout<<endl<<endl;
                 break;
-            case 4:
+            case 4:  //Correlation matrix con su respectiva funcion
                 cout<<"\e[1m====CORRELATION MATRIX====\e[0m"<<endl;
 
                 cout<<endl<<endl;
                 break;
-            case 5:
+            case 5:  //Archivo txt y binario
 
 
                 cout<<endl<<endl;
@@ -79,23 +89,17 @@ int main(){
 
     }while(opcion!=5);
 
+    //Se libera memoria dinamica de la matriz
+    for(int i=0; i<numero_filas;i++){
+
+        delete[] *(matriz+i);
+    }
+    delete[] matriz;
     cout<<"Proceso terminado exitosamente"<<endl;
 
     return 0;
 }
 
 
-void menu(){
-
-    cout << "-------------------------------------\n";
-    cout << "  [1] Head\n";
-    cout << "  [2] Info\n";
-    cout << "  [3] Describe\n";
-    cout << "  [4] Correlation Matrix\n";
-    cout << "  [5] Guardar resultados del analisis, cargar la base de datos a archivo binario y salir\n";
-    cout << "-------------------------------------\n";
-    cout << "Ingrese el número de la opción deseada: ";
-
-}
 
 

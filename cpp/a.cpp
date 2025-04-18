@@ -626,7 +626,7 @@ int main(){
     
 
 
-    ifstream archivo("/Users/lorenzoramirez/Developer/Programacion Avanzada/C++/Proyecto/Admissions.csv");
+    ifstream archivo("Admissions.csv");
 
 
     if (!archivo.is_open()){

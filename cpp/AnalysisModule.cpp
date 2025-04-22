@@ -110,9 +110,9 @@ void printInfo(string **matriz, int numero_columnas, int numero_filas){
 
         bool is_string= false;
 
-        for(int j=0; j<size(*(*(matriz+1)+(i-1))); j++ ){
+        for(int j=0; j<(*(*(matriz+1)+(i-1))).size(); j++ ){
 
-            if(((*(*(matriz+1)+(i-1)))[j]>57)||((*(*(matriz+1)+(i-1)))[j]<48)){
+            if((((*(*(matriz+1)+(i-1)))[j]>57)||((*(*(matriz+1)+(i-1)))[j]<48))&&((*(*(matriz+1)+(i-1)))[j]!=46)){
 
                 is_string=true;  //Se revisa cada caracter de esa celda si alguno no es un numero es un string
             }

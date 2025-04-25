@@ -83,7 +83,7 @@ void writeStudentsBinary(Student lista[], size_t tamaño_arreglo_bits){
     size_t numero_de_registros= tamaño_arreglo_bits/sizeof(Student);
 
 
-    ofstream archivo("Admission_Predict_new.bin", ios::binary);
+    ofstream archivo("../data/Admission_Predict_new.bin", ios::binary);
 
     if(archivo.is_open()){
 
@@ -99,7 +99,7 @@ void writeStudentsBinary(Student lista[], size_t tamaño_arreglo_bits){
 
     archivo.close();
 
-    ifstream archivo_lectura("Admission_Predict_new.bin", ios::binary);
+    ifstream archivo_lectura("../data/Admission_Predict_new.bin", ios::binary); 
 
     Student lectura_estudiantes[numero_de_registros];
 

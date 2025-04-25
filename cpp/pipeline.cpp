@@ -39,6 +39,8 @@ int main(){
     int numero_filas=csv.numero_filas;
     int numero_columnas=csv.numero_columnas;
     string **matriz=csv.matriz;
+    Student lista[numero_filas-1];
+    size_t tamaño_arreglo_bits;
 
     int opcion=-1;
 
@@ -60,7 +62,7 @@ int main(){
             //Head con su respectiva funcion
             case 1:
                 cout<<"\e[1m====HEAD====\e[0m"<<endl;
-                printHead(matriz, numero_columnas);
+                printHead(matriz, numero_columnas,numero_filas);
                 cout<<endl<<endl;
                 break;
             case 2:  //Info con su respectiva funcion
@@ -79,6 +81,12 @@ int main(){
                 cout<<endl<<endl;
                 break;
             case 5:  //Archivo txt y binario
+
+
+
+                convertTableToStudents(matriz, numero_columnas, numero_filas, lista);
+                tamaño_arreglo_bits= sizeof(lista);
+                writeStudentsBinary(lista, tamaño_arreglo_bits);
 
 
                 cout<<endl<<endl;

@@ -21,14 +21,17 @@ const int colmatriz=9;
 double datosmatriz[filamatriz][colmatriz];
 double matrizcorr[colmatriz][colmatriz];
 
-void printHead(string **matriz, int numero_columnas){
+void printHead(string **matriz, int numero_columnas, int numero_filas){
 
+    int opcion;
+    cout<<"Ingrese el numero de filas que quiere visualizar maximo "<<numero_filas<<": ";
+    cin>>opcion;
     /*
     Se imprimen las 5 filas de la matriz utilizando un ciclo anidado y 
     la libreria iosmanip para tener un output de la matriz mas organizado,
     al asignarle un espacio determinado a cada columna haciendo que no dependa de la longitud del string.
     */
-    for(int i=0; i<5; i++){
+    for(int i=0; i<opcion; i++){
         int x=0;
         for(int j=0; j<numero_columnas; j++){
 

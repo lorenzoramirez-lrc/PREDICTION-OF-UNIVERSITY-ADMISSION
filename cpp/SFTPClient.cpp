@@ -1,101 +1,55 @@
-#include <libssh/libssh.h>
-#include <libssh/sftp.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>      // open() flags
-#include <errno.h>
-#include <string.h>
+#include <curl/curl.h>
+#include <fstream>
+#include <iostream>
 
-void download_file(const char *host, int port, const char *user, const char *password, const char *remote_path, const char *local_path) {
-    ssh_session session = ssh_new();
-    if (!session) {
-        fprintf(stderr, "Error creando sesión SSH\n");
-        return;
-    }
+using namespace std;
 
-    ssh_options_set(session, SSH_OPTIONS_HOST, host);
-    ssh_options_set(session, SSH_OPTIONS_PORT, &port);
-    ssh_options_set(session, SSH_OPTIONS_USER, user);
-
-    if (ssh_connect(session) != SSH_OK) {
-        fprintf(stderr, "Error conectando: %s\n", ssh_get_error(session));
-        ssh_free(session);
-        return;
-    }
-
-    if (ssh_userauth_password(session, NULL, password) != SSH_AUTH_SUCCESS) {
-        fprintf(stderr, "Error de autenticación: %s\n", ssh_get_error(session));
-        ssh_disconnect(session);
-        ssh_free(session);
-        return;
-    }
-
-    // Iniciar sesión SFTP
-    sftp_session sftp = sftp_new(session);
-    if (!sftp) {
-        fprintf(stderr, "Error creando sesión SFTP: %s\n", ssh_get_error(session));
-        ssh_disconnect(session);
-        ssh_free(session);
-        return;
-    }
-
-    if (sftp_init(sftp) != SSH_OK) {
-        fprintf(stderr, "Error inicializando SFTP: %d\n", sftp_get_error(sftp));
-        sftp_free(sftp);
-        ssh_disconnect(session);
-        ssh_free(session);
-        return;
-    }
-
-    // Abrir archivo remoto
-    sftp_file remote_file = sftp_open(sftp, remote_path, O_RDONLY, 0);
-    if (!remote_file) {
-        fprintf(stderr, "Error abriendo archivo remoto: %s\n", ssh_get_error(session));
-        sftp_free(sftp);
-        ssh_disconnect(session);
-        ssh_free(session);
-        return;
-    }
-
-    FILE *local_file = fopen(local_path, "wb");
-    if (!local_file) {
-        fprintf(stderr, "Error creando archivo local: %s\n", strerror(errno));
-        sftp_close(remote_file);
-        sftp_free(sftp);
-        ssh_disconnect(session);
-        ssh_free(session);
-        return;
-    }
-
-    char buffer[1024];
-    int nbytes;
-    while ((nbytes = sftp_read(remote_file, buffer, sizeof(buffer))) > 0) {
-        fwrite(buffer, 1, nbytes, local_file);
-    }
-
-    if (nbytes < 0) {
-        fprintf(stderr, "Error leyendo archivo remoto: %s\n", ssh_get_error(session));
-    }
-
-    fclose(local_file);
-    sftp_close(remote_file);
-    sftp_free(sftp);
-    ssh_disconnect(session);
-    ssh_free(session);
-
-    printf("Archivo descargado correctamente a %s\n", local_path);
+// Función para escribir datos en un archivo local
+size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
+    ofstream* out = static_cast<ofstream*>(stream);
+    size_t written = size * nmemb;
+    out->write(static_cast<char*>(ptr), written);
+    return written;
 }
 
-int main() {
-    const char *host = "4.tcp.ngrok.io";
-    int port = 14835;
-    const char *user = "LORENZO.RAMIREZC";
-    const char *password = "20550074";
+bool downloadFileSFTP(const string& host, int port, const string& user, const string& password, const string& remote_path, const string& local_path) {
+    CURL *curl;
+    CURLcode res;
+    ofstream file(local_path, ios::binary);
 
-    const char *remote_path = "/home/LORENZO.RAMIREZC/workspace/Admission_Predict.csv";
-    const char *local_path = "Admission_Predict.csv";
+    if (!file.is_open()) {
+        cerr << "Error abriendo archivo local para escribir" << endl;
+        return false;
+    }
 
-    download_file(host, port, user, password, remote_path, local_path);
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+    if(curl) {
+        string sftp_url = "sftp://" + host + ":" + to_string(port) + remote_path;
 
-    return 0;
+        // Establecer la URL, usuario y contraseña para la conexión SFTP
+        curl_easy_setopt(curl, CURLOPT_URL, sftp_url.c_str());
+        curl_easy_setopt(curl, CURLOPT_USERPWD, (user + ":" + password).c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &file);
+
+        res = curl_easy_perform(curl);
+        if(res != CURLE_OK) {
+            cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
+            curl_easy_cleanup(curl);
+            file.close();
+            return false;
+        }
+
+        curl_easy_cleanup(curl);
+    } else {
+        cerr << "Error iniciando libcurl" << endl;
+        file.close();
+        return false;
+    }
+
+    file.close();
+    curl_global_cleanup();
+    cout << "Archivo descargado exitosamente!" << endl;
+    return true;
 }

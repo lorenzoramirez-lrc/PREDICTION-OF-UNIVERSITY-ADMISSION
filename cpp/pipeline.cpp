@@ -11,7 +11,7 @@ using namespace std;
 int main(){
     //Se crea csv
     CSV csv;
-    ifstream archivo("Admissions.csv");  //Se abre el archivo
+    ifstream archivo("cpp/Admissions.csv");  //Se abre el archivo
     string enter;
 
     cout<<endl<<endl;
@@ -77,13 +77,13 @@ int main(){
                 break;
             case 4:  //Correlation matrix con su respectiva funcion
                 cout<<"\e[1m====CORRELATION MATRIX====\e[0m"<<endl;
-
+                printCorrelation(matriz, numero_columnas, numero_filas);
                 cout<<endl<<endl;
                 break;
             case 5:  //Archivo txt y binario
 
 
-
+                saveAnalysisToTxt(matriz,numero_columnas,numero_filas);
                 convertTableToStudents(matriz, numero_columnas, numero_filas, lista);
                 tamaño_arreglo_bits= sizeof(lista);
                 writeStudentsBinary(lista, tamaño_arreglo_bits);

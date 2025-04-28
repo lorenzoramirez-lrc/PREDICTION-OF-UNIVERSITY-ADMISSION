@@ -10,7 +10,7 @@ using namespace std;
 void printHead(string **matriz, int numero_columnas, int numero_filas){
 
     int opcion;
-    cout<<"Ingrese el numero de filas que quiere visualizar maximo "<<numero_filas<<": ";
+    cout<<"Ingrese el numero de filas que quiere visualizar (maximo "<<numero_filas<<"): ";
     cin>>opcion;
     /*
     Se imprimen las 5 filas de la matriz utilizando un ciclo anidado y 
@@ -219,3 +219,85 @@ void printDescribe(string **matriz, int numero_columnas, int numero_filas){
 
 
 
+void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
+
+    string matriz_correlacion[numero_columnas+1][numero_columnas+1];
+
+    //matriz_correlacion[0][0]="";
+
+    for(int j=0;j<numero_columnas ;j++){
+
+        matriz_correlacion[0][j+1]=(*(*(matriz+0)+j));
+        matriz_correlacion[j+1][0]=(*(*(matriz+0)+j));
+
+    }
+
+
+    float n= numero_filas-1;
+    float suma_x= 0;
+    float suma_y= 0;
+    float suma_xy=0;
+    float suma_x2=0;
+    float suma_y2=0;
+    float corr;
+
+
+    for(int i=0; i<numero_columnas; i++){
+        for(int j=0; j<numero_columnas; j++){
+            for(int k=1;k<numero_filas ;k++){
+
+                suma_x += stof(*(*(matriz+k)+i));
+                suma_y += stof(*(*(matriz+k)+j));
+                suma_xy += stof(*(*(matriz+k)+i))*stof(*(*(matriz+k)+j));
+                suma_x2 += stof(*(*(matriz+k)+i))*stof(*(*(matriz+k)+i));
+                suma_y2 += stof(*(*(matriz+k)+j))*stof(*(*(matriz+k)+j));
+
+            }
+
+            corr= (n*suma_xy-suma_x*suma_y)/sqrt((n*suma_x2-(suma_x*suma_x))*(n*suma_y2-(suma_y*suma_y)));
+            matriz_correlacion[i+1][j+1]= to_string(corr);
+
+            suma_x= 0;
+            suma_y= 0;
+            suma_xy=0;
+            suma_x2=0;
+            suma_y2=0;
+
+        }
+    }
+
+
+    for(int i=0; i<numero_columnas+1; i++){
+        for(int j=0; j<numero_columnas+1; j++){
+
+            cout<<left<<setw(17)<<matriz_correlacion[i][j];
+
+
+        
+        }
+        cout<<endl;
+    }
+}
+
+
+void saveAnalysisToTxt(string **matriz, int numero_columnas, int numero_filas){
+
+
+    freopen("data/transformacion_resultados.txt","w",stdout);
+
+    cout<<"====INFO===="<<endl;
+    printInfo(matriz, numero_columnas, numero_filas);
+    cout<<endl<<endl;
+
+    cout<<"====DESCRIBE===="<<endl;
+    printDescribe(matriz, numero_columnas, numero_filas);
+    cout<<endl<<endl;
+
+    cout<<"====CORRELATION MATRIX===="<<endl;
+    printCorrelation(matriz, numero_columnas, numero_filas);
+    cout<<endl<<endl;
+
+    freopen("/dev/tty", "w", stdout);
+
+
+}

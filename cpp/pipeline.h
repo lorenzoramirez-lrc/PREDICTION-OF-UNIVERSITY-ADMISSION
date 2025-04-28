@@ -24,6 +24,8 @@ CSV readCSV(ifstream& inFile);
 void printHead(string **matriz, int numero_columnas, int numero_filas);
 void printInfo(string **matriz, int numero_columnas, int numero_filas);
 void printDescribe(string **matriz, int numero_columnas, int numero_filas);
+void printCorrelation(string **matriz, int numero_columnas, int numero_filas);
+void saveAnalysisToTxt(string **matriz, int numero_columnas, int numero_filas);
 
 
 //Funciones Conversion Module

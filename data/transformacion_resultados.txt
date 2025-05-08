@@ -10,7 +10,7 @@ SOP
 LOR 
 CGPA
 Research
-Chance of Admit
+Chance of Admit 
 
 Resumen por columnas: 
 #    Column                   Non-Null Count   Dtype     
@@ -34,7 +34,7 @@ SOP: Mean=3.4000, Std=1.0056, Min=1.0000, Max=5.0000
 LOR : Mean=3.4525, Std=0.8974, Min=1.0000, Max=5.0000
 CGPA: Mean=8.5989, Std=0.5956, Min=6.8000, Max=9.9200
 Research: Mean=0.5475, Std=0.4977, Min=0.0000, Max=1.0000
-Chance of Admit: Mean=0.7244, Std=0.1424, Min=0.3400, Max=0.9700
+Chance of Admit : Mean=0.7244, Std=0.1424, Min=0.3400, Max=0.9700
 
 
 ====CORRELATION MATRIX====

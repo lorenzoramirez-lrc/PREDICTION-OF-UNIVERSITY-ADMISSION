@@ -9,7 +9,7 @@ using namespace std;
 
 
 int main(){
-
+    /*
     unordered_map <string, string> envCred;
 
     if(!loadEnv("cpp/Credenciales.env", envCred)){
@@ -27,14 +27,14 @@ int main(){
     if(!downloadFileSFTP(envCred["SFTP_URL"], stoi(envCred["SFTP_PORT"]), envCred["SFTP_USER"], envCred["SFTP_PASSWORD"], "workspace/Admission_Predict.csv", "data/Admission_Predict.csv")){
         cerr << "Error descargando el archivo" << endl;
         return 1;
-    };
+    };  */
 
     
 
 
     //Se crea csv
     CSV csv;
-    ifstream archivo("data/Admissions.csv");  //Se abre el archivo
+    ifstream archivo("data/Admission_Predict.csv");  //Se abre el archivo
     string enter;
 
     cout<<endl<<endl;

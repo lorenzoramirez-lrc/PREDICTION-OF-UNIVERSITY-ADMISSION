@@ -9,28 +9,6 @@ using namespace std;
 
 
 int main(){
-    /*
-    unordered_map <string, string> envCred;
-
-    if(!loadEnv("cpp/Credenciales.env", envCred)){
-        return 1;
-    }else{
-
-        cout<<endl<<"Archivo .env cargado correctamente y todas las variables existen."<<endl;
-        cout << "SFTP_URL="<<envCred["SFTP_URL"]<<endl;
-        cout << "SFTP_PORT="<<envCred["SFTP_PORT"]<<endl;
-        cout << "SFTP_USER="<<envCred["SFTP_USER"]<<endl;
-        cout << "SFTP_PASSWORD="<<envCred["SFTP_PASSWORD"]<<endl;
-
-    }
-
-    if(!downloadFileSFTP(envCred["SFTP_URL"], stoi(envCred["SFTP_PORT"]), envCred["SFTP_USER"], envCred["SFTP_PASSWORD"], "workspace/Admission_Predict.csv", "data/Admission_Predict.csv")){
-        cerr << "Error descargando el archivo" << endl;
-        return 1;
-    };  */
-
-    
-
 
     //Se crea csv
     CSV csv;

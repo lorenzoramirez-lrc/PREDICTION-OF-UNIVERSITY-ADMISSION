@@ -7,15 +7,6 @@
 using namespace std;
 
 
-//Funciones Envloader
-
-bool loadEnv(string ruta_archivo, unordered_map<string, string> &envCred);
-
-
-//Funciones SFTP Client
-
-bool downloadFileSFTP(const string& host, int port, const string& user, const string& password, const string& remote_path, const string& local_path);
-
 //Funciones Data Transformer
 struct CSV{
 

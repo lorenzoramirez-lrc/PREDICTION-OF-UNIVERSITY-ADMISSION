@@ -1,0 +1,14 @@
+{
+    "intercept": -1.2594,
+    "coefficients": {
+        "GRE Score": 0.0017,
+        "TOEFL Score": 0.0029,
+        "University Rating": 0.0057,
+        "SOP": -0.0033,
+        "LOR": 0.0224,
+        "CGPA": 0.1189,
+        "Research": 0.0245
+    },
+    "mse": 0.004,
+    "r2": 0.8035
+}

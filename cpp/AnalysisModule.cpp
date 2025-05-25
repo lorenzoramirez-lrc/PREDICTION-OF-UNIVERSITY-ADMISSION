@@ -221,10 +221,11 @@ void printDescribe(string **matriz, int numero_columnas, int numero_filas){
 
 void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
 
+    //Se crea matriz para almacenar resultados de correlacion
     string matriz_correlacion[numero_columnas+1][numero_columnas+1];
 
-    //matriz_correlacion[0][0]="";
 
+    //Llena los Encabezados de cada dato en filas y columnas
     for(int j=0;j<numero_columnas ;j++){
 
         matriz_correlacion[0][j+1]=(*(*(matriz+0)+j));
@@ -232,7 +233,7 @@ void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
 
     }
 
-
+    //Variables para el calculo de correlacion
     float n= numero_filas-1;
     float suma_x= 0;
     float suma_y= 0;
@@ -241,11 +242,12 @@ void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
     float suma_y2=0;
     float corr;
 
-
+    //Recorre todos los posibles pares de columnas
     for(int i=0; i<numero_columnas; i++){
         for(int j=0; j<numero_columnas; j++){
+            //De ese par de columnas reccorre todas sus filas
             for(int k=1;k<numero_filas ;k++){
-
+                   //Calcula las sumas necesarias
                 suma_x += stof(*(*(matriz+k)+i));
                 suma_y += stof(*(*(matriz+k)+j));
                 suma_xy += stof(*(*(matriz+k)+i))*stof(*(*(matriz+k)+j));
@@ -253,10 +255,10 @@ void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
                 suma_y2 += stof(*(*(matriz+k)+j))*stof(*(*(matriz+k)+j));
 
             }
-
+            //Obtiene el valor de correlacion
             corr= (n*suma_xy-suma_x*suma_y)/sqrt((n*suma_x2-(suma_x*suma_x))*(n*suma_y2-(suma_y*suma_y)));
-            matriz_correlacion[i+1][j+1]= to_string(corr);
-
+            matriz_correlacion[i+1][j+1]= to_string(corr); //Almacena en matriz
+            //Reinicia Valores
             suma_x= 0;
             suma_y= 0;
             suma_xy=0;
@@ -266,7 +268,7 @@ void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
         }
     }
 
-
+    //Imprime la matriz
     for(int i=0; i<numero_columnas+1; i++){
         for(int j=0; j<numero_columnas+1; j++){
 
@@ -282,7 +284,8 @@ void printCorrelation(string **matriz, int numero_columnas, int numero_filas){
 
 void saveAnalysisToTxt(string **matriz, int numero_columnas, int numero_filas){
 
-
+    /*Se usa Freopen para crear el archivo, el beneficio de este es que se puede utilizar cout para escribir en el
+    permitiendo escribir en el archivo utilizando las mismas funciones.*/
     freopen("data/transformacion_resultados.txt","w",stdout);
 
     cout<<"====INFO===="<<endl;
@@ -297,6 +300,8 @@ void saveAnalysisToTxt(string **matriz, int numero_columnas, int numero_filas){
     printCorrelation(matriz, numero_columnas, numero_filas);
     cout<<endl<<endl;
 
+    //Se utiliza para despues de utilizar la funcion se vuelva a imprimir desde consola y no al archivo
+    //Para windows esta linea deberia cambiarse a freopen("CON", "w", stdout);
     freopen("/dev/tty", "w", stdout);
 
 

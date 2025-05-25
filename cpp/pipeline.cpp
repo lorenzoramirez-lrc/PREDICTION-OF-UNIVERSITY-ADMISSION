@@ -36,7 +36,7 @@ int main(){
 
     archivo.close();
     
-    //Se asigna numero de filas columnas y matrizx
+    //Se asigna numero de filas columnas y matriz
     int numero_filas=csv.numero_filas;
     int numero_columnas=csv.numero_columnas;
     string **matriz=csv.matriz;

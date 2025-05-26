@@ -302,6 +302,8 @@ void saveAnalysisToTxt(string **matriz, int numero_columnas, int numero_filas){
 
     //Se utiliza para despues de utilizar la funcion se vuelva a imprimir desde consola y no al archivo
     //Para windows esta linea deberia cambiarse a freopen("CON", "w", stdout);
+
+    //freopen("CON", "w", stdout);
     freopen("/dev/tty", "w", stdout);
 
 

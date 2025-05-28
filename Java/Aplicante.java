@@ -1,5 +1,7 @@
 public class Aplicante {
 
+    //Atributos del aplicante
+    private final String nombre;
     private int GreScore;
     private int ToeflScore;
     private int UniversityRating;
@@ -8,8 +10,9 @@ public class Aplicante {
     private double CGPA;
     private int Research;
 
-
-    public Aplicante(int GreScore, int ToeflScore, int UniversityRating, float Sop, float Lor, float CGPA, int Research) {
+    //Constructor por parametros
+    public Aplicante(String nombre,int GreScore, int ToeflScore, int UniversityRating, double Sop, double Lor, double CGPA, int Research) {
+        this.nombre=nombre;
         this.GreScore = GreScore;
         this.ToeflScore = ToeflScore;
         this.UniversityRating = UniversityRating;
@@ -44,6 +47,9 @@ public class Aplicante {
     }
 
     //Getters
+    public String getNombre() {
+        return nombre;
+    }
     public int getGreScore() {
         return GreScore;
     }
@@ -53,13 +59,13 @@ public class Aplicante {
     public int getUniversityRating() {
         return UniversityRating;
     }
-    public float getSop() {
+    public double getSop() {
         return Sop;
     }
-    public float getLor() {
+    public double getLor() {
         return Lor;
     }
-    public float getCGPA() {
+    public double getCGPA() {
         return CGPA;
     }
     public int getResearch() {

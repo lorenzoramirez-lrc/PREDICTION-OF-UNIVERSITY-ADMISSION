@@ -73,14 +73,14 @@ public class FormularioAplicante extends JFrame {
 
         // Imagen del resultado
         imagenResultado = new JLabel("", SwingConstants.CENTER);
-        add(imagenResultado, BorderLayout.CENTER);
+        add(imagenResultado, BorderLayout.EAST);
 
         // Botón de envío
         submitButton = new JButton("Evaluar Aplicación");
         add(submitButton, BorderLayout.WEST);
 
         // Cargar modelo desde JSON
-        modelo = new ModeloRegresion("data/modelo_parametros.json"); // Asegúrate de tener este archivo
+        modelo = new ModeloRegresion("data/modelo_parametros.json");
 
         submitButton.addActionListener(new ActionListener() {
             @Override

@@ -8,7 +8,7 @@ public class ModeloRegresion {
     //Atributos del modelo de regresion
     private double intercept;
     private Map<String, Double> coeficientes;
-    private double limite;
+
 
     //Constructor del modelo
     public ModeloRegresion(String path) {
@@ -81,8 +81,8 @@ public class ModeloRegresion {
     }
 
     //Se regresa un booleano sabiendo si el aplicante fue admitido o no
-    public boolean admitido(Aplicante aplicante, double limite) {
-        return prediccion(aplicante)>=limite;
+    public boolean admitido(Aplicante aplicante) {
+        return prediccion(aplicante)>=0.8;
     }
 
 

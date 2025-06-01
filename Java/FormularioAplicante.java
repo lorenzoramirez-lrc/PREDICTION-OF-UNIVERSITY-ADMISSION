@@ -99,7 +99,7 @@ public class FormularioAplicante extends JFrame {
                     );
 
                     //Evaluar si fue admitido
-                    boolean admitido = modelo.admitido(aplicante, 0.8); // ejemplo umbral
+                    boolean admitido = modelo.admitido(aplicante); // ejemplo umbral
 
                     String mensaje;
                     String rutaImagen;

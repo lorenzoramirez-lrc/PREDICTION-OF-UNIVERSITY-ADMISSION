@@ -106,11 +106,11 @@ public class FormularioAplicante extends JFrame {
 
                     //Se configura el mensaje con base al resultado
                     if (admitido) {
-                        mensaje = String.format(aplicante.getNombre() +" has sido admitido (puntaje: %.2f)",modelo.prediccion(aplicante));
+                        mensaje = String.format(aplicante.getNombre() +" has sido admitido (Puntaje: %.2f%%)",modelo.prediccion(aplicante)*100);
                         rutaImagen = "data/admitido.png";
                         resultadoLabel.setForeground(new Color(0, 128, 0));
                     } else {
-                        mensaje = String.format(aplicante.getNombre() +" no has sido admitido (puntaje: %.2f)", modelo.prediccion(aplicante));
+                        mensaje = String.format(aplicante.getNombre() +" no has sido admitido (Puntaje: %.2f%%)",modelo.prediccion(aplicante)*100);
                         rutaImagen = "data/no_admitido.png";
                         resultadoLabel.setForeground(Color.RED);
                     }

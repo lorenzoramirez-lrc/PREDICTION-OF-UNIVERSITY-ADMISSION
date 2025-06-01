@@ -116,13 +116,13 @@ void writeStudentsBinary(Student lista[], size_t tamaño_arreglo_bits){
         //Lee numero de registros
         archivo_lectura.read(reinterpret_cast<char*>(&num), sizeof(size_t));
 
-        cout<<"Numero de registros leido: "<< num<<endl;
+        cout<<"Numero de registros leidos: "<< num<<endl;
 
         //Lee los datos del binario y los almacena en el arreglo de estructura
         archivo_lectura.read(reinterpret_cast<char*>(lectura_estudiantes), num*sizeof(Student));
 
         //Se imprimen primer y ultimo registro leido para verificacion
-        cout<<"Primer y ultimos registros leidos del archivo binario"<<endl;
+        cout<<"Primer y ultimo registro leido del archivo binario"<<endl;
 
         cout<<lectura_estudiantes[0].SerialNo<<";"<<lectura_estudiantes[0].greScore<<";"<<lectura_estudiantes[0].toeflScore<<";"<<lectura_estudiantes[0].universityRating<<";"<<lectura_estudiantes[0].sop<<";"<<lectura_estudiantes[0].lor<<";"<<lectura_estudiantes[0].cgpa<<";"<<lectura_estudiantes[0].research<<";"<<lectura_estudiantes[0].ChanceofAdmit<<endl;
 

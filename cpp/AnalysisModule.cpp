@@ -116,7 +116,7 @@ void printInfo(string **matriz, int numero_columnas, int numero_filas){
             if((particion_flotante-(int)particion_flotante)==0){  //Sehace verificacion si es float o entero
                 info[i][3]="Integer";
             }else{
-                info[i][3]="Float";
+                info[i][3]="Double";
             }
             
         }

@@ -1,0 +1,52 @@
+====INFO====
+Numero de filas (incluyendo header): 401
+Numero de columnas: 9
+Nombres de columnas: 
+Serial No.
+GRE Score
+TOEFL Score
+University Rating
+SOP
+LOR 
+CGPA
+Research
+Chance of Admit 
+
+Resumen por columnas: 
+#    Column                   Non-Null Count   Dtype     
+0    Serial No.               400              Integer   
+1    GRE Score                400              Integer   
+2    TOEFL Score              400              Integer   
+3    University Rating        400              Integer   
+4    SOP                      400              Double    
+5    LOR                      400              Double    
+6    CGPA                     400              Double    
+7    Research                 400              Integer   
+8    Chance of Admit          400              Double    
+
+
+====DESCRIBE====
+Serial No.: Mean=200.5000, Std=115.4696, Min=1.0000, Max=400.0000
+GRE Score: Mean=316.8075, Std=11.4593, Min=290.0000, Max=340.0000
+TOEFL Score: Mean=107.4100, Std=6.0619, Min=92.0000, Max=120.0000
+University Rating: Mean=3.0875, Std=1.1423, Min=1.0000, Max=5.0000
+SOP: Mean=3.4000, Std=1.0056, Min=1.0000, Max=5.0000
+LOR : Mean=3.4525, Std=0.8974, Min=1.0000, Max=5.0000
+CGPA: Mean=8.5989, Std=0.5956, Min=6.8000, Max=9.9200
+Research: Mean=0.5475, Std=0.4977, Min=0.0000, Max=1.0000
+Chance of Admit : Mean=0.7244, Std=0.1424, Min=0.3400, Max=0.9700
+
+
+====CORRELATION MATRIX====
+                 Serial No.       GRE Score        TOEFL Score      University RatingSOP              LOR              CGPA             Research         Chance of Admit  
+Serial No.       1.000000         -0.097643        -0.147933        -0.169948        -0.166933        -0.088222        -0.045595        -0.063138        0.042334         
+GRE Score        -0.097643        1.000000         0.836857         0.669692         0.613489         0.558148         0.833882         0.581016         0.803487         
+TOEFL Score      -0.147933        0.836857         1.000000         0.695587         0.657978         0.567719         0.828512         0.489856         0.791585         
+University Rating-0.169948        0.669692         0.695587         1.000000         0.734523         0.660123         0.746477         0.447783         0.711256         
+SOP              -0.166933        0.613489         0.657978         0.734523         1.000000         0.729593         0.718145         0.444029         0.675731         
+LOR              -0.088222        0.558148         0.567719         0.660123         0.729593         1.000000         0.670200         0.396859         0.669888         
+CGPA             -0.045595        0.833882         0.828512         0.746477         0.718145         0.670200         1.000000         0.521658         0.873296         
+Research         -0.063138        0.581016         0.489856         0.447783         0.444029         0.396859         0.521658         1.000000         0.553203         
+Chance of Admit  0.042334         0.803487         0.791585         0.711256         0.675731         0.669888         0.873296         0.553203         1.000000         
+
+
